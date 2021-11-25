@@ -60,7 +60,7 @@ func (warrior *Warrior) defense() bool {
 	var array [10]bool
 	number := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < 10; i++ {
-		if i < 7 {
+		if i < 3 {
 			array[i] = true
 		} else {
 			array[i] = false
@@ -101,7 +101,7 @@ func (wizard *Wizard) defense() bool {
 	var array [10]bool
 	number := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < 10; i++ {
-		if i < 3 {
+		if i < 1 {
 			array[i] = true
 		} else {
 			array[i] = false
@@ -141,7 +141,7 @@ func (archer *Archer) defense() bool {
 	var array [10]bool
 	number := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < 10; i++ {
-		if i < 5 {
+		if i < 2 {
 			array[i] = true
 		} else {
 			array[i] = false
