@@ -46,12 +46,12 @@ type Archer struct {
 
 func (warrior *Warrior) attack(hero Hero) {
 	if hero.defense() {
-		fmt.Println("Block")
+		fmt.Println(warrior.getName(), " DEALS DAMAGE EQUAL ", 0, " TO ", hero.getName())
 	} else if !hero.criticalHit() {
-		fmt.Println("Damage: ", warrior.damage)
+		fmt.Println(warrior.getName(), " DEALS DAMAGE EQUAL ", warrior.damage, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - warrior.damage)
 	} else {
-		fmt.Println("Damage: ", warrior.damage * 2)
+		fmt.Println(warrior.getName(), " DEALS CRITICAL DAMAGE EQUAL ", warrior.damage * 2, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - warrior.damage * 2)
 	}
 }
@@ -87,12 +87,12 @@ func (warrior *Warrior) criticalHit() bool {
 
 func (wizard *Wizard) attack(hero Hero) {
 	if hero.defense() {
-		fmt.Println("Block")
+		fmt.Println(wizard.getName(), " DEALS DAMAGE EQUAL ", 0, " TO ", hero.getName())
 	} else if !hero.criticalHit() {
-		fmt.Println("Damage: ", wizard.damage)
+		fmt.Println(wizard.getName(), " DEALS DAMAGE EQUAL ", wizard.damage, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - wizard.damage)
 	} else {
-		fmt.Println("Damage: ", wizard.damage * 2)
+		fmt.Println(wizard.getName(), " DEALS CRITICAL DAMAGE EQUAL ", wizard.damage * 2, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - wizard.damage * 2)
 	}
 }
@@ -127,12 +127,12 @@ func(wizard *Wizard) criticalHit() bool {
 
 func (archer *Archer) attack(hero Hero) {
 	if hero.defense() {
-		fmt.Println("Block")
+		fmt.Println(archer.getName(), " DEALS DAMAGE EQUAL ", 0, " TO ", hero.getName())
 	} else if !hero.criticalHit() {
-		fmt.Println("Damage: ", archer.damage)
+		fmt.Println(archer.getName(), " DEALS DAMAGE EQUAL ", archer.damage, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - archer.damage)
 	} else {
-		fmt.Println("Damage: ", archer.damage * 2)
+		fmt.Println(archer.getName(), " DEALS CRITICAL DAMAGE EQUAL ", archer.damage * 2, " TO ", hero.getName())
 		hero.setHealth(hero.getHealth() - archer.damage * 2)
 	}
 }

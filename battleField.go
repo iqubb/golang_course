@@ -6,32 +6,26 @@ import (
 	"time"
 )
 
+func FindFighter(contains *[]bool, heroes *[]Hero) int {
+	fighter := rand.Intn(len(*heroes))
+	if (*contains)[fighter] {
+		for (*contains)[fighter] {
+			fighter = rand.Intn(len(*heroes))
+		}
+		(*contains)[fighter] = true
+	} else {
+		(*contains)[fighter] = true
+	}
+	return fighter
+}
+
 func SplitIntoGroups(heroes *[]Hero) map[int]int {
 	result := make(map[int]int)
 	contains := make([]bool, len(*heroes), len(*heroes))
 	rand.Seed(time.Now().UnixNano())
-
 	for len(result) != len(*heroes)/2 {
-		firstFighter := rand.Intn(len(*heroes))
-		if contains[firstFighter] {
-			for contains[firstFighter] {
-				firstFighter = rand.Intn(len(*heroes))
-			}
-			contains[firstFighter] = true
-		} else {
-			contains[firstFighter] = true
-		}
-		secondFighter := rand.Intn(len(*heroes))
-
-		if contains[secondFighter] {
-			for contains[secondFighter] {
-				secondFighter = rand.Intn(len(*heroes))
-			}
-			contains[secondFighter] = true
-		} else {
-			contains[secondFighter] = true
-		}
-
+		firstFighter := FindFighter(&contains, heroes)
+		secondFighter := FindFighter(&contains, heroes)
 		result[firstFighter] = secondFighter
 	}
 	return result
@@ -76,7 +70,7 @@ func Fight() {
 		heroes = survivingHeroes
 		groups = SplitIntoGroups(&heroes)
 		fmt.Println(groups)
-		Print(heroes)
+
 	}
 	fmt.Println("TOURNAMENT WINNER: ", heroes[0].getName())
 }
@@ -84,19 +78,20 @@ func Fight() {
 func Duel(firstFighter, secondFighter, winner chan Hero) {
 	for first := range firstFighter {
 		for second := range secondFighter {
-			fmt.Println("Fight between ", first.getName(), "and ", second.getName())
-
+			fmt.Println("FIGHT BETWEEN ", first.getName(), "AND ", second.getName())
 			for first.getHealth() >= 0 && second.getHealth() >= 0 {
 				first.attack(second)
+				fmt.Println("HEALTH ", second.getName(), " AFTER ATTACK ", first.getName(), " EQUAL ", second.getHealth())
 				if second.getHealth() <= 0 {
 					winner <- first
-					fmt.Println("Duel Winner: ", first.getName())
+					fmt.Println("IN DUEL BETWEEN ", first.getName(), " AND ", second.getName(), " WON ", first.getName())
 					return
 				}
 				second.attack(first)
+				fmt.Println("HEALTH ", first.getName(), " AFTER ATTACK ", second.getName(), " EQUAL ", first.getHealth())
 			}
 			winner <- second
-			fmt.Println("Duel Winner: ", second.getName())
+			fmt.Println("IN DUEL BETWEEN ", first.getName(), " AND ", second.getName(), " WON ", second.getName())
 		}
 	}
 }
